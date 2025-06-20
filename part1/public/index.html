@@ -1,25 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Dog of the Day</title>
   <script src="https://unpkg.com/vue@3"></script>
-  <style>
-    body {
-      background: #ffcc00;
-      font-family: Comic Sans MS, cursive;
-    }
-    img {
-      width: 80%;
-      display: block;
-      margin: 20px auto;
-    }
-  </style>
 </head>
 <body>
   <div id="app">
     <h1>Dog of the Day</h1>
-    <img src="#" :src="dogImage" alt="Random dog photo" />
-    <button type="button" @click="fetchDog">Click if you dare</button>
+    <img :src="dogImage" alt="Random Dog Picture" />
+    <button @click="getDog">Get New Dog</button>
   </div>
 
   <script>
@@ -32,16 +22,14 @@
         }
       },
       methods: {
-        fetchDog() {
-          fetch('https://dog.ceo/api/breeds/image/random')
-            .then(res => res.json())
-            .then(data => {
-              this.dogImage = data.message;
-            })
+        async getDog() {
+          const res = await fetch('https://dog.ceo/api/breeds/image/random');
+          const data = await res.json();
+          this.dogImage = data.message;
         }
       },
       mounted() {
-        this.fetchDog();
+        this.getDog();
       }
     }).mount('#app');
   </script>
