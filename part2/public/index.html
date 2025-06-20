@@ -61,7 +61,6 @@
       const username = ref('');
       const password = ref('');
       const error = ref('');
-      const allDogs = ref([]);
 
       async function fetchAllDogsWithPhotos() {
       const res = await fetch('/api/users/dogs');
@@ -103,7 +102,7 @@
         }
       }
 
-      return { message, username, password, error, allDogs, login };
+      return { message, username, password, error, login };
     }
   }).mount('#app');
 </script>
