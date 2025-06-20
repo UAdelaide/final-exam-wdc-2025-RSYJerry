@@ -24,7 +24,7 @@
       </div>
       <button type="submit" class="btn btn-primary">Log In</button>
     </form>
-    
+
     <div v-if="error" class="alert alert-danger mt-3">{{ error }}</div>
   </div>
 
@@ -33,12 +33,36 @@
   </div>
 
   <script>
-    const { createApp } = Vue;
+    const { createApp, ref } = Vue;
     createApp({
-      data() {
-        return {
-          message: 'Welcome to the Dog Walking Service!'
-        };
+      setup() {
+        const message = ref('Welcome to the Dog Walking Service!');
+        const email = ref('');
+        const password = ref('');
+        const error = ref('');
+
+        async function login() {
+          error.value = '';
+          const res = await fetch('/api/users/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email.value, password: password.value })
+          });
+          const data = await res.json();
+          if (res.ok) {
+            if (data.user.role === 'owner') {
+              window.location.href = 'owner-dashboard.html';
+            } else if (data.user.role === 'walker') {
+              window.location.href = 'walker-dashboard.html';
+            } else {
+              error.value = 'Unknown role';
+            }
+          } else {
+            error.value = data.error || 'Login failed';
+          }
+        }
+
+        return { message, email, password, error, login };
       }
     }).mount('#app');
   </script>
