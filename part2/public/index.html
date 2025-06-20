@@ -28,49 +28,14 @@
     <div v-if="error" class="alert alert-danger mt-3">{{ error }}</div>
   </div>
 
-  <h2 class="mt-5 mb-3">All Registered Dogs</h2>
-  <div v-if="loadingDogs" class="mb-3">Loading dogs</div>
-  <table v-else class="table table-striped dogs-table">
-    <thead>
-      <tr>
-        <th>Dog ID</th>
-        <th>Name</th>
-        <th>Size</th>
-        <th>Owner ID</th>
-        <th>Photo</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="dog in dogs" :key="dog.dog_id">
-        <td>{{ dog.dog_id }}</td>
-        <td>{{ dog.name }}</td>
-        <td>{{ dog.size }}</td>
-        <td>{{ dog.owner_id }}</td>
-        <td>
-          <img
-            v-if="dogPhotos[dog.dog_id]"
-            :src="dogPhotos[dog.dog_id]"
-            class="dog-img"
-            :alt="dog.name"
-          >
-          <span v-else>Loading...</span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
   <script>
-  const { createApp, ref, onMounted } = Vue;
+  const { createApp, ref } = Vue;
   createApp({
     setup() {
       const message = ref('Welcome to the Dog Walking Service!');
       const username = ref('');
       const password = ref('');
       const error = ref('');
-      const dogs = ref([]);
-      const loadingDogs = ref(true);
-      const dogPhotos = ref({});
 
       async function login() {
         error.value = '';
