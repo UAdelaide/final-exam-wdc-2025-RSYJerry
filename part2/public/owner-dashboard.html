@@ -86,16 +86,15 @@
         const error = ref('');
 
         async function loadDogs() {
-      try {
-        // Fetch the logged-in owner's dogs
-        const res = await fetch('/api/users/dogs/mine');
-        if (!res.ok) throw new Error('Failed to load dogs');
-        dogs.value = await res.json();
-      } catch (err) {
-        dogs.value = [];
-        error.value = 'Could not load your dogs.';
-      }
-    }
+          try {
+            const res = await fetch('/api/users/dogs/mine');
+            if (!res.ok) throw new Error('Failed to load dogs');
+            dogs.value = await res.json();
+          } catch (err) {
+            dogs.value = [];
+            error.value = 'Could not load your dogs.';
+          }
+        }
 
         async function loadWalks() {
           try {
