@@ -28,6 +28,32 @@
     <div v-if="error" class="alert alert-danger mt-3">{{ error }}</div>
   </div>
 
+  <div class="mt-5">
+      <h2 class="mb-3">All Dogs</h2>
+      <div v-if="allDogs.length === 0" class="text-muted">Loading dogs...</div>
+      <table v-else class="table table-bordered align-middle">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Owner ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="dog in allDogs" :key="dog.dog_id">
+            <td style="width:120px;">
+              <img :src="dog.photo" alt="Dog photo" style="width:100px; height:100px; object-fit:cover;">
+            </td>
+            <td>{{ dog.name }}</td>
+            <td>{{ dog.size }}</td>
+            <td>{{ dog.owner_id }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <script>
   const { createApp, ref } = Vue;
   createApp({
