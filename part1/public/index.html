@@ -6,12 +6,12 @@
   <script src="https://unpkg.com/vue@3"></script>
   <style>
     body {
-      background-color: #b0b0b0; /* dull grey background */
-      color: #b0b0b0; /* same dull color: low contrast = poor accessibility */
-      font-size: 24px; /* overly large text adds cognitive load */
+      background-color: #b0b0b0;
+      color: #b0b0b0;
+      font-size: 24px;
     }
     button {
-      font-size: 30px; /* huge button text */
+      font-size: 30px;
       margin: 20px;
     }
   </style>
@@ -19,9 +19,7 @@
 <body>
   <div id="app">
     <h1>Dog of the Day</h1>
-    <!-- Valid static src for linter, Vue binding for runtime -->
     <img src="#" :src="dogImage" alt="" />
-    <!-- Valid type attribute, vague label -->
     <button type="button" @click="getDog">Click</button>
   </div>
 
