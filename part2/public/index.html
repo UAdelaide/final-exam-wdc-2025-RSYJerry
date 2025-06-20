@@ -110,7 +110,20 @@
           loadingDogs.value = false;
         }
 
-      
+      async function fetchDogPhoto(dogId) {
+          try {
+            const res = await fetch('https://dog.ceo/api/breeds/image/random');
+            const data = await res.json();
+            if (data.status === 'success') {
+              dogPhotos.value[dogId] = data.message;
+            }
+          } catch (e) {
+          }
+        }
+
+        onMounted(() => {
+          fetchDogs();
+        });
 
       return { message, username, password, error, login };
     }
