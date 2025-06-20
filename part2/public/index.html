@@ -96,7 +96,19 @@
         }
       }
 
-      
+      async function fetchDogs() {
+          loadingDogs.value = true;
+          try {
+            const res = await fetch('/api/dogs');
+            const dogList = await res.json();
+            dogs.value = dogList;
+            for (const dog of dogList) {
+              fetchDogPhoto(dog.dog_id);
+            }
+          } catch (e) {
+          }
+          loadingDogs.value = false;
+        }
 
       return { message, username, password, error, login };
     }
