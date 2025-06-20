@@ -63,6 +63,25 @@
       const error = ref('');
       const allDogs = ref([]);
 
+      async function fetchAllDogsWithPhotos() {
+      const res = await fetch('/api/users/dogs');
+      const dogs = await res.json();
+      await Promise.all(dogs.map(async (dog) => {
+        try {
+          const picRes = await fetch('https://dog.ceo/api/breeds/image/random');
+          const picJson = await picRes.json();
+          dog.photo = picJson.message;
+        } catch {
+          dog.photo = '';
+        }
+      }));
+      allDogs.value = dogs;
+    }
+
+    onMounted(() => {
+      fetchAllDogsWithPhotos();
+    });
+
       async function login() {
         error.value = '';
         const res = await fetch('/api/users/login', {
