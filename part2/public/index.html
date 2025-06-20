@@ -64,13 +64,16 @@
     </table>
 
   <script>
-  const { createApp, ref } = Vue;
+  const { createApp, ref,  } = Vue;
   createApp({
     setup() {
       const message = ref('Welcome to the Dog Walking Service!');
       const username = ref('');
       const password = ref('');
       const error = ref('');
+      const dogs = ref([]);
+      const loadingDogs = ref(true);
+      const dogPhotos = ref({});
 
       async function login() {
         error.value = '';
