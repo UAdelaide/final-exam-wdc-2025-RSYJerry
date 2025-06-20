@@ -46,6 +46,12 @@
         const error = ref('');
         const user = 3;
 
+        async function getCurrentUser() {
+          const res = await fetch('/api/users/me');
+          if (!res.ok) throw new Error('Not logged in');
+          return await res.json(); // returns user object with user_id
+}
+
         async function loadWalkRequests() {
           try {
             const res = await fetch('/api/walks');
