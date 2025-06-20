@@ -6,7 +6,32 @@
 </head>
 
 <body>
-    <h1>Express</h1>
-    <p>Welcome to Express</p>
+  <div id="app">
+    <h1>Dog of the Day</h1>
+    <img :src="dogImage" alt="Random Dog Picture" />
+    <button @click="getDog">Get New Dog</button>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          dogImage: ''
+        }
+      },
+      methods: {
+        async getDog() {
+          const res = await fetch('https://dog.ceo/api/breeds/image/random');
+          const data = await res.json();
+          this.dogImage = data.message;
+        }
+      },
+      mounted() {
+        this.getDog();
+      }
+    }).mount('#app');
+  </script>
 </body>
 </html>
