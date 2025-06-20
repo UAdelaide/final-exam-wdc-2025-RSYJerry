@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Dog of the Day</title>
   <script src="https://unpkg.com/vue@3"></script>
   <style>
     body {
-      background: linear-gradient(to right, yellow, red, blue);
-      font-family: Comic Sans MS, cursive, sans-serif;
-    }
-    img {
-      width: 500px;
-      height: auto;
-      border: 5px dashed purple;
+      background-color: #b0b0b0; /* dull grey background */
+      color: #b0b0b0; /* same dull color: low contrast = poor accessibility */
+      font-size: 24px; /* overly large text adds cognitive load */
     }
     button {
-      font-size: 2em;
-      background: lime;
-      border: none;
+      font-size: 30px; /* huge button text */
+      margin: 20px;
     }
   </style>
 </head>
 <body>
   <div id="app">
     <h1>Dog of the Day</h1>
+    <!-- Valid static src for linter, Vue binding for runtime -->
     <img src="#" :src="dogImage" alt="" />
+    <!-- Valid type attribute, vague label -->
     <button type="button" @click="getDog">Click</button>
   </div>
 
@@ -36,16 +34,18 @@
         }
       },
       methods: {
-        async getDog() {
-          const res = await fetch('https://dog.ceo/api/breeds/image/random');
-          const data = await res.json();
-          this.dogImage = data.message;
+        getDog() {
+          fetch('https://dog.ceo/api/breeds/image/random')
+            .then(response => response.json())
+            .then(data => {
+              this.dogImage = data.message;
+            });
         }
       },
       mounted() {
         this.getDog();
       }
-    }).mount('#app');
+    }).mount('#app')
   </script>
 </body>
 </html>
