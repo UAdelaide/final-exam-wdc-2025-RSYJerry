@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Dog Walk Service - Dog of the Day</title>
-  <!-- Vue 3 CDN -->
+  <title>Dog of the Day</title>
   <script src="https://unpkg.com/vue@3"></script>
   <style>
     body {
-      background: #ffcc00; /* Loud color, bad for accessibility */
-      font-family: Comic Sans MS, cursive; /* Informal font, adds confusion */
+      background: #ffcc00;
+      font-family: Comic Sans MS, cursive;
     }
     img {
       width: 80%;
@@ -20,9 +18,7 @@
 <body>
   <div id="app">
     <h1>Dog of the Day 🐶</h1>
-    <!-- Poor UX: no alt text -->
     <img :src="dogImage" />
-    <!-- Confusing instructions -->
     <button @click="fetchDog">Click if you dare</button>
   </div>
 
