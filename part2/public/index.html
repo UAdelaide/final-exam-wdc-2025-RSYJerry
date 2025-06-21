@@ -42,12 +42,12 @@
       <tbody>
         <tr v-for="dog in dogs" :key="dog.dog_id">
           <td>{{ dog.dog_id }}</td>
-        <td>{{ dog.name }}</td>
-        <td>{{ dog.size }}</td>
-        <td>{{ dog.owner_id }}</td>
-        <td>
-          <img v-if="dog.photo" :src="dog.photo" class="dog-img" :alt="dog.name" style="width: 90px; height: 90px; object-fit: cover; border-radius: 12px;">
-          <span v-else>Loading...</span>
+          <td>{{ dog.name }}</td>
+          <td>{{ dog.size }}</td>
+          <td>{{ dog.owner_id }}</td>
+          <td>
+            <img v-if="dog.photo" :src="dog.photo" class="dog-img" :alt="dog.name" style="width: 90px; height: 90px; object-fit: cover; border-radius: 12px;">
+            <span v-else>Loading...</span>
         </td>
       </tr>
     </tbody>
