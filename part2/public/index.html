@@ -65,6 +65,8 @@
       const dogs = ref([]);
       const loadingDogs = ref(true);
 
+      
+
       async function login() {
         error.value = '';
         const res = await fetch('/api/users/login', {
