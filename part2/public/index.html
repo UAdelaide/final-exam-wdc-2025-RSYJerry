@@ -27,7 +27,32 @@
 
     <div v-if="error" class="alert alert-danger mt-3">{{ error }}</div>
 
-    
+    <h2 class="mt-5 mb-3">All Registered Dogs</h2>
+  <div v-if="loadingDogs" class="mb-3">Loading dogs...</div>
+  <table v-else class="table table-striped dogs-table">
+    <thead>
+      <tr>
+        <th>Dog ID</th>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Owner ID</th>
+        <th>Photo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="dog in dogs" :key="dog.dog_id">
+        <td>{{ dog.dog_id }}</td>
+        <td>{{ dog.name }}</td>
+        <td>{{ dog.size }}</td>
+        <td>{{ dog.owner_id }}</td>
+        <td>
+          <img v-if="dog.photo" :src="dog.photo" class="dog-img" :alt="dog.name" style="width: 90px; height: 90px; object-fit: cover; border-radius: 12px;">
+          <span v-else>Loading...</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
   </div>
 
   <script>
