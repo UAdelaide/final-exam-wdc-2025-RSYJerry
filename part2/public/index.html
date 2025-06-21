@@ -65,7 +65,31 @@
       const dogs = ref([]);
       const loadingDogs = ref(true);
 
-      
+      async function fetchDogs() {
+      loadingDogs.value = true;
+      try {
+        const res = await fetch('/api/dogs');
+        const dogList = await res.json();
+        // For each dog, fetch a random photo
+        await Promise.all(dogList.map(async (dog) => {
+          try {
+            const picRes = await fetch('https://dog.ceo/api/breeds/image/random');
+            const picJson = await picRes.json();
+            dog.photo = picJson.message;
+          } catch {
+            dog.photo = '';
+          }
+        }));
+        dogs.value = dogList;
+      } catch (e) {
+        dogs.value = [];
+      }
+      loadingDogs.value = false;
+    }
+
+    onMounted(() => {
+      fetchDogs();
+    });
 
       async function login() {
         error.value = '';
